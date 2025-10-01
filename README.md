@@ -4,7 +4,7 @@ The ESP32 Sparrow board is an IoT device designed for projects that require low 
 
 ## Pinout
 
-![ESP32](./images/ESP32-C6-Sparrow-Pinout.png)
+![ESP32](./images/ESP32-C6-Sparrow-Pinout_v3-1.png)
 
 ## Components
 
@@ -13,19 +13,20 @@ Its other features include:
 - **Display:** DFR0647 - Data display (I2C)
 - **Memory:** W25Q512JVEIQ - 64 MB Flash memory (SPI)
 - **Memory:** 112A-TAAR-R03 - SD card slot for external storage (SPI)
-- **Sensor:** BME680 - Temperature, humidity, pressure, and air quality sensor (I2C)
-- **Sensor:** BMI085 - 3-axis accelerometer and gyroscope (I2C)
-- **Sensor:** LTR308 - Ambient light sensor (I2C)
+- **Sensor:** BME688 - Temperature, humidity, pressure, and air quality sensor (I2C)
+- **Sensor:** LSM6DSL - 3-axis accelerometer and gyroscope (I2C)
+- **Sensor:** LTR303 - Ambient light sensor (I2C)
 - **Microphone:** ICS-43434 - High-quality digital microphone (I2S)
 - **LED:** WS2812B2020 - Neopixel RGB LED (GPIO)
 - **Communication:** PRT-14417 - Qwiic/Stemma QT connector (I2C)
 - **Voltage Supervisor:** BD5229G-TR - Shuts down microcontroller below 2.9V
+- **Battery Lveel:** MAX17048 - Measures battery voltage (I2C)
 - **USB C:** USB4110-GF-A - USB C connector for programming/charging
 - **Power:** 18650 Battery - Holder on the back
 
 ## Pins for each component
 
-**1. MicroSD Card Holder**
+**1. MicroSD Card Holder (SPI)**
 
 | PIN NAME            | GPIO Pin   |
 |---------------------|------------|
@@ -35,7 +36,7 @@ Its other features include:
 | SCK                 | GPIO6      |
 
 
-**2. NOR Flash SPI**
+**2. NOR Flash (SPI)**
 
 | PIN NAME            | GPIO Pin   |
 |---------------------|------------|
@@ -54,11 +55,11 @@ Its other features include:
 
 **4. I2C Bus Addresses**
 
-| CHIP                | Address |
-|---------------------|---------|
-| BMI085 Accelerometer| 0x18    |
-| BMI085 Gyroscope    | 0x68    |
-| BME680              | 0x76    |
+| CHIP    | Address |
+|---------|---------|
+| LSM6DSL | 0x6A    |
+| BME680  | 0x76    |
+| LTR303  | 0x29    |
 
 
 **5. Neopixel RGB LED**
@@ -68,7 +69,7 @@ Its other features include:
 | NEOPIXEL | GPIO3    |
 
 
-**6. Microphone ICS-43434**
+**6. Microphone ICS-43434 (I2S)**
 
 | PIN NAME | GPIO Pin |
 |----------|----------|
@@ -77,13 +78,20 @@ Its other features include:
 | MIC_SD   | GPIO19   |
 
 
-**7. Other pins**
+**7. Battery Charge Level MAX17048**
+
+| PIN NAME | GPIO Pin |
+|----------|----------|
+| INT_VLT  | GPIO4    |
+
+
+
+**8. Other pins**
 
 | PIN NAME               | GPIO Pin |
 |------------------------|----------|
 | IO / BOOT Button       | GPIO9    |
 | UART_TX                | GPIO16   |
 | UART_RX                | GPIO17   |
-| Battery Level          | GPIO4    |
 | Accelerometer Interrupt| GPIO11   |
-| LTR308 Interrupt       | GPIO15   |
+| LTR303 Interrupt       | GPIO15   |
