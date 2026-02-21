@@ -1,0 +1,119 @@
+/* Remap I2C0 to Sparrow pins and add the BME688 (uses bme680 compatible) */
+
+#include <zephyr/dt-bindings/pinctrl/esp-pinctrl-common.h>
+#include <zephyr/dt-bindings/pinctrl/esp32c6-pinctrl.h>
+#include <zephyr/dt-bindings/pinctrl/esp32c6-gpio-sigmap.h>
+#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/led/led.h>
+
+/ {
+    chosen {
+        zephyr,console = &usb_serial;
+        zephyr,shell-uart = &usb_serial;
+        zephyr,uart-mcumgr = &usb_serial;
+		zephyr,led-strip = &neopixel;
+		zephyr,display = &oled;
+    };
+
+	aliases {
+		neopixel = &neopixel;
+		fuel-gauge = &max17048;
+		oled = &oled;
+	};
+};
+ 
+&usb_serial {
+    status = "okay";
+};
+
+&flash0 {
+	reg = <0x0 0x400000>;
+};
+
+&pinctrl {
+	i2c0_default: i2c0_default {
+		group1 {
+			pinmux = <I2C0_SDA_GPIO21>,
+				 <I2C0_SCL_GPIO22>;
+			bias-pull-up;
+			drive-open-drain;
+			output-high;
+		};
+	};
+};
+
+&i2c0 {
+	status = "okay";
+	pinctrl-0 = <&i2c0_default>;
+	pinctrl-names = "default";
+
+	bme688: bme680@76 {
+		compatible = "bosch,bme680";
+		reg = <0x76>;
+	};
+
+	ltr303: ltr303@29 {
+		compatible = "liteon,ltr303";
+		reg = <0x29>;
+		int-gpios = <&gpio0 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+	};
+
+	max17048: max17048@36 {
+		compatible = "maxim,max17048";
+		reg = <0x36>;
+	};
+
+	lsm6dsl: lsm6dsl@6a {
+		compatible = "st,lsm6dsl";
+		reg = <0x6a>;
+		irq-gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>;
+	};
+
+	oled: ssd1306@3c {
+		compatible = "solomon,ssd1306fb";
+		reg = <0x3c>;
+		width = <128>;
+		height = <32>;
+		segment-offset = <0>;
+		page-offset = <0>;
+		display-offset = <0>;
+		multiplex-ratio = <31>;
+		segment-remap;
+		com-invdir;
+		com-sequential;
+		prechargep = <0x22>;
+	};
+};
+
+/ {
+	max17048_alert: max17048_alert {
+		compatible = "sparrow,gpio-alert";
+		gpios = <&gpio0 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+	};
+};
+
+&i2s_default {
+	group1 {
+		pinmux = <I2S_O_SD_GPIO3>;
+	};
+};
+
+&i2s {
+	status = "okay";
+	dmas = <&dma 3>;
+	dma-names = "tx";
+
+	neopixel: ws2812@0 {
+		compatible = "worldsemi,ws2812-i2s";
+		reg = <0>;
+		chain-length = <1>;
+		color-mapping = <LED_COLOR_ID_GREEN
+				 LED_COLOR_ID_RED
+				 LED_COLOR_ID_BLUE>;
+		reset-delay = <500>;
+	};
+};
+
+&dma {
+	status = "okay";
+};

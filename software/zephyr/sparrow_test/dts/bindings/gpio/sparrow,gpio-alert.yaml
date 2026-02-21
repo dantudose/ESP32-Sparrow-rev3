@@ -1,0 +1,14 @@
+# Copyright (c) 2025
+# SPDX-License-Identifier: Apache-2.0
+
+description: GPIO alert pin used for external devices.
+
+compatible: "sparrow,gpio-alert"
+
+include: base.yaml
+
+properties:
+  gpios:
+    type: phandle-array
+    required: true
+    description: Alert GPIO connected to an external device interrupt/alert pin.

@@ -1,0 +1,12 @@
+# Auto-connect Wi-Fi at boot
+# net iface up 1
+oled invert on
+oled font 1
+oled print 0 0 Booting...
+wifi connect -s "SSID" -p "PASS" -k 1 -i 1
+bme log start 60 /lfs/logs/bme.log
+ltr log start 60 /lfs/logs/ltr.log
+max17048 log start 60 /lfs/logs/fuelgauge.log
+http start
+oled font 0
+oled info 10

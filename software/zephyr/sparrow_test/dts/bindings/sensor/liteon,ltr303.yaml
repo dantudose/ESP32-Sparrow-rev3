@@ -1,0 +1,54 @@
+# Copyright (c) 2025
+# SPDX-License-Identifier: Apache-2.0
+
+description: LiteOn LTR-303 Ambient Light Sensor
+
+compatible: "liteon,ltr303"
+
+include: [sensor-device.yaml, i2c-device.yaml]
+
+properties:
+  int-gpios:
+    type: phandle-array
+    description: Interrupt GPIO connected to the LTR303 INT pin.
+
+  gain:
+    type: int
+    default: 0
+    description: |
+      ALS gain setting (register value). Common values:
+      - 0 # 1x
+      - 1 # 2x
+      - 2 # 4x
+      - 3 # 8x
+      - 6 # 48x
+      - 7 # 96x
+    enum: [0, 1, 2, 3, 6, 7]
+
+  integration-time:
+    type: int
+    default: 0
+    description: |
+      ALS integration time setting (register value).
+      - 0 # 100ms
+      - 1 # 50ms
+      - 2 # 200ms
+      - 3 # 400ms
+      - 4 # 150ms
+      - 5 # 250ms
+      - 6 # 300ms
+      - 7 # 350ms
+    enum: [0, 1, 2, 3, 4, 5, 6, 7]
+
+  measurement-rate:
+    type: int
+    default: 3
+    description: |
+      ALS measurement repeat rate setting (register value).
+      - 0 # 50ms
+      - 1 # 100ms
+      - 2 # 200ms
+      - 3 # 500ms
+      - 4 # 1000ms
+      - 5 # 2000ms
+    enum: [0, 1, 2, 3, 4, 5]
