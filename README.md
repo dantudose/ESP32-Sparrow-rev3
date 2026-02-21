@@ -24,6 +24,17 @@ Its other features include:
 - **USB C:** USB4110-GF-A - USB C connector for programming/charging
 - **Power:** 18650 Battery - Holder on the back
 
+![ESP32](./images/sparrow_rev3.png)
+
+## Repository Contents
+* **/hardware** - Fusion360 design files (.brd, .sch) and .pdf schematic
+* **/images** - Pinout and board images
+* **/software** - Code examples
+    * **/arduino-ide** - Simple Arduino project
+    * **/platformio** - Test project for PlatformIO
+    * **/zephyr** - Test project for Zephyr OS
+
+
 ## Pins for each component
 
 **1. MicroSD Card Holder (SPI)**
