@@ -11,8 +11,9 @@ The ESP32 Sparrow board is an IoT device designed for projects that require low 
 Its other features include:
 
 - **Display:** DFR0647 - Data display (I2C)
-- **Memory:** W25Q512JVEIQ - 64 MB Flash memory (SPI)
-- **Memory:** SD card slot for external storage (SPI)
+- **Memory:** 
+    - **Flash:** W25Q512JVEIQ - 64 MB Flash memory (SPI)
+    - **SD card** slot for external storage (SPI)
 - **Sensors:** 
     - **BME688**  - Temperature, humidity, pressure, and air quality sensor (I2C)
     - **SLSM6DSL** - 3-axis accelerometer and gyroscope (I2C)
