@@ -94,6 +94,8 @@ Its other features include:
 | UART_TX                | GPIO16   |
 | UART_RX                | GPIO17   |
 | Accelerometer Interrupt| GPIO11   |
-
 | LTR303 Interrupt       | GPIO15   |
+
+
+
 
