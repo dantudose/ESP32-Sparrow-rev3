@@ -1,4 +1,4 @@
-# ESP32-C6 Sparrow Board
+# ESP32-Sparrow rev3 Board
 
 The ESP32 Sparrow board is an IoT device designed for projects that require low battery consumption. It is built around the ESP32-C6 module, which features Zigbee and Thread compatibility.
 
@@ -94,4 +94,5 @@ Its other features include:
 | UART_TX                | GPIO16   |
 | UART_RX                | GPIO17   |
 | Accelerometer Interrupt| GPIO11   |
+
 | LTR303 Interrupt       | GPIO15   |
