@@ -12,16 +12,17 @@ Its other features include:
 
 - **Display:** DFR0647 - Data display (I2C)
 - **Memory:** W25Q512JVEIQ - 64 MB Flash memory (SPI)
-- **Memory:** 112A-TAAR-R03 - SD card slot for external storage (SPI)
-- **Sensor:** BME688 - Temperature, humidity, pressure, and air quality sensor (I2C)
-- **Sensor:** LSM6DSL - 3-axis accelerometer and gyroscope (I2C)
-- **Sensor:** LTR303 - Ambient light sensor (I2C)
+- **Memory:** SD card slot for external storage (SPI)
+- **Sensors:** 
+    - **BME688**  - Temperature, humidity, pressure, and air quality sensor (I2C)
+    - **SLSM6DSL** - 3-axis accelerometer and gyroscope (I2C)
+    - **LTR303** - Ambient light sensor (I2C)
 - **Microphone:** ICS-43434 - High-quality digital microphone (I2S)
 - **LED:** WS2812B2020 - Neopixel RGB LED (GPIO)
 - **Communication:** PRT-14417 - Qwiic/Stemma QT connector (I2C)
 - **Voltage Supervisor:** BD5229G-TR - Shuts down microcontroller below 2.9V
-- **Battery Lveel:** MAX17048 - Measures battery voltage (I2C)
-- **USB C:** USB4110-GF-A - USB C connector for programming/charging
+- **Battery Level:** MAX17048 - Measures battery voltage (I2C)
+- **USB C** connector for programming/charging
 - **Power:** 18650 Battery - Holder on the back
 
 ![ESP32](./images/sparrow_rev3.png)
