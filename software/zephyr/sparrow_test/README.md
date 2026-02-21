@@ -63,3 +63,68 @@ it from the shell:
 ```sh
 fs cat /lfs/logs/boot.log
 ```
+
+## Features
+
+This application includes a rich set of features for interacting with the Sparrow v3.2 hardware.
+
+- **Peripherals**: Drivers and shell commands for the onboard OLED display, BME680, LSM6DSL, LTR303, MAX17048 sensors, and Neopixel.
+- **Connectivity**: WiFi station mode with network time (NTP) synchronization.
+- **Storage**: LittleFS filesystem on the internal flash for configuration, web assets, and data logging.
+- **Remote Access**: A web-based UI and a comprehensive serial shell for control and diagnostics.
+- **Automation**: A startup script (`/lfs/startup.txt`) can be used to run shell commands on boot.
+
+## Peripherals
+
+### OLED Display
+
+The monochrome OLED display can be controlled via the `oled` shell command. It can display text, status information, and images.
+
+- **Show status**: `oled status`
+- **Show info screen**: `oled info 5` (updates every 5 seconds)
+- **Turn display on/off**: `oled on`, `oled off`
+- **Print text**: `oled print 0 0 "Hello"`
+- **Draw a PBM image**: `oled bmp bitmaps/smiley.pbm`
+
+The info screen provides a summary of the device status, including time, IP address, and sensor readings.
+
+### Sensors
+
+The application supports several onboard sensors, each with its own set of shell commands for configuration and data logging.
+
+- **BME680 (Temp/Humidity/Pressure/Gas)**: `bme` command.
+  - `bme read`: Read current sensor values.
+  - `bme log start 30`: Start logging data every 30 seconds to `/lfs/logs/bme.csv`.
+- **LSM6DSL (Accelerometer/Gyro)**: `lsm6dsl` command.
+  - `lsm6dsl read`: Read current sensor values.
+  - `lsm6dsl log start`: Start logging data.
+- **LTR303 (Ambient Light)**: `ltr` command.
+  - `ltr read`: Read current light sensor values (lux).
+  - `ltr log start`: Start logging data.
+- **MAX17048 (Fuel Gauge)**: `max` command.
+  - `max read`: Read battery voltage and state of charge.
+  - `max log start`: Start logging battery status.
+
+### Neopixel
+
+The RGB Neopixel can be controlled with the `neopixel` command.
+
+- **Set color**: `neopixel set_rgb 255 0 0` (Red)
+- **Set brightness**: `neopixel set_hsv 0 255 50`
+- **Turn off**: `neopixel off`
+
+## Web Interface
+
+The device runs a web server that provides a user interface for monitoring the device.
+
+1. Connect the device to your WiFi network:
+   ```sh
+   wifi connect -s "YOUR_WIFI_AP" -p "YOUR_WIFI_PASSWORD"
+   ```
+2. Get the device's IP address:
+   ```sh
+   net iface
+   ```
+3. Open a web browser and navigate to `http://<device-ip>/`.
+
+The web interface is served from the `/lfs/web/` directory. You can also retrieve sensor logs, e.g., `http://<device-ip>/bme_log`.
